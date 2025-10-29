@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour
 
         if (touchPosition.x < screenWidth / 2)
         {
+            rb.linearVelocity = new Vector2(-moveSpeed, 0);
+        }
+        else
+        {
             rb.linearVelocity = new Vector2(moveSpeed, 0);
         }
     }
@@ -53,5 +57,12 @@ public class PlayerController : MonoBehaviour
         Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(pos.x, -xLimit, xLimit);
         transform.position = pos;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("FallingObject"))
+        {
+            GameManajer.Instance.GameOver();
+        }
     }
 }
