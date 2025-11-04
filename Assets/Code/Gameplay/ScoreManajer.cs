@@ -4,26 +4,58 @@ using TMPro;
 public class ScoreManajer : MonoBehaviour
 {
     public static ScoreManajer Instance;
-    public TMP_Text scoreText;
-    private int score;
-    private void Awake()
+
+    public TMP_Text scoreText;     
+    public TMP_Text highScoreText; 
+
+    private int score = 0;
+    private int highScore = 0;
+
+    void Awake()
     {
-        Instance = this;
-        score = 0;
-        UpdateScoreText();
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
+
+    void Start()
+    {
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+        // Perbarui teks awal
+        UpdateScoreText();
+        UpdateHighScoreText();
+    }
+
     public void AddScore(int amount)
     {
         score += amount;
         UpdateScoreText();
+
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore", highScore);
+            PlayerPrefs.Save();
+            UpdateHighScoreText();
+        }
     }
-    public int GetScore()
-    {
-        return score;
-    }
+
     private void UpdateScoreText()
     {
         if (scoreText != null)
-            scoreText.text = "Score: " + score.ToString();
+            scoreText.text = "Score: " + score;
+    }
+
+    private void UpdateHighScoreText()
+    {
+        if (highScoreText != null)
+            highScoreText.text = "High Score: " + highScore;
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 }

@@ -7,6 +7,7 @@ public class FailingObject : MonoBehaviour
     {
         if (transform.position.y < -6f)
         {
+            if (ScoreManajer.Instance != null)
             ScoreManajer.Instance.AddScore(scoreValue);
             Destroy(gameObject);
         }
