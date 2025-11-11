@@ -1,12 +1,13 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScoreManajer : MonoBehaviour
 {
     public static ScoreManajer Instance;
 
-    public TMP_Text scoreText;     
-    public TMP_Text highScoreText; 
+    public TMP_Text scoreText;
+    public TMP_Text highScoreText;
 
     private int score = 0;
     private int highScore = 0;
@@ -14,16 +15,21 @@ public class ScoreManajer : MonoBehaviour
     void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-        else
-            Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
     }
 
     void Start()
     {
         highScore = PlayerPrefs.GetInt("HighScore", 0);
-
-        // Perbarui teks awal
+        score = 0;
         UpdateScoreText();
         UpdateHighScoreText();
     }
@@ -54,8 +60,12 @@ public class ScoreManajer : MonoBehaviour
             highScoreText.text = "High Score: " + highScore;
     }
 
-    public int GetScore()
+    public int GetScore() => score;
+    public int GetHighScore() => highScore;
+
+    public void ResetScore()
     {
-        return score;
+        score = 0;
+        UpdateScoreText();
     }
 }

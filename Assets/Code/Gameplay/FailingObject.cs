@@ -9,6 +9,9 @@ public class FailingObject : MonoBehaviour
         {
             if (ScoreManajer.Instance != null)
             ScoreManajer.Instance.AddScore(scoreValue);
+
+            if (SoundManajer.instance != null)
+                SoundManajer.instance.PlayScoreSound();
             Destroy(gameObject);
         }
     }

@@ -17,10 +17,29 @@ public class GameManajer : MonoBehaviour
         Time.timeScale = 0f;
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
+        if (SoundManajer.instance != null)
+            SoundManajer.instance.PlayGameOverSound();
     }    
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ScoreManajer.Instance.ResetScore();
+
+        // Hancurkan semua objek jatuh
+        foreach (var obj in GameObject.FindGameObjectsWithTag("FallingObject"))
+            Destroy(obj);
+
+        // Reset posisi player
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+            player.transform.position = new Vector3(0, -3.5f, -1f);
+
+        // Putar efek suara restart
+        AudioSource audio = GetComponent<AudioSource>();
+        if (audio != null)
+            audio.Play();
+        gameOverPanel.SetActive(false);
+        if (SoundManajer.instance != null)
+            SoundManajer.instance.PlayRestartSound();
     }
 }
