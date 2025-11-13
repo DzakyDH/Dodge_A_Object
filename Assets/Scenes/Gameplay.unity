@@ -657,6 +657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 739220796}
   - component: {fileID: 739220795}
+  - component: {fileID: 739220797}
   m_Layer: 31
   m_Name: Sky
   m_TagString: Untagged
@@ -687,7 +688,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d6eda43983c840440851920536756b34, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -728,12 +729,25 @@ Transform:
   m_GameObject: {fileID: 739220794}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.9626, y: 4.2832003, z: 2}
-  m_LocalScale: {x: 0.6440837, y: 1.6406978, z: 1}
+  m_LocalPosition: {x: -1.1, y: 4.59, z: 2}
+  m_LocalScale: {x: 0.009404604, y: 0.015901648, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 446979301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &739220797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739220794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 937cbc1c03c12354e8abc8b48f75da86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 0.02
 --- !u!1 &786112977
 GameObject:
   m_ObjectHideFlags: 0
